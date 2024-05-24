@@ -13,6 +13,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponse
 from django.template import loader
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -221,16 +222,19 @@ def request1(start,end):
 
    # response.headers.add('Access-Control-Allow-Origin', '*')
    # Iterate through each list of airports
-# Initialize empty lists to store codes
-
-    return response
+# Initialize empty lists to store codesfrom django.shortcuts import render
 
 
 
 
 
+
+@csrf_exempt
 def home(request):
+      
+      print(request.POST)
       request1( 'OGG' ,'DEN')
+
 
       template = loader.get_template('index.html')
       return HttpResponse(template.render())
