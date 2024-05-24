@@ -12,8 +12,30 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link href="static/index.css" rel="stylesheet">
-    <title>Hello, world!</title>
-   
+    <title>Aeronavigator!</title>
+  
+    
+    <style>
+        #routecard{
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        #formselect{
+            display:none;
+            position: relative;
+            width: 77%;
+            margin-top: -660px;
+            background-color: #FF416C;
+            border-radius: 40px;
+            height: 419px;
+            margin-left: 135px;
+        }
+
+        #main-heading{
+          text-align: center;
+        }
+    </style>
         
 
   </head>
@@ -25,7 +47,7 @@
     <nav class="navbar navbar-light" style="background-color: #ff4557;">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">
-            Bootstrap
+            AeroNavigator
           </a>
         </div>
       </nav>
@@ -53,7 +75,7 @@
                 </div>
                 <span>or use your email for registration</span>
                 <input type="text" placeholder="Name" />
-                <input type="email" placeholder="Email" />
+                <input type="text" placeholder="Email" />
                 <input type="password" placeholder="Password" />
                 <button onclick="fromsubmit()">Sign Up</button>
             </form>
@@ -67,7 +89,7 @@
                     <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <span>or use your account</span>
-                <input type="email" placeholder="Email" />
+                <input type="text" placeholder="Email" />
                 <input type="password" placeholder="Password" />
                 <a href="#">Forgot your password?</a>
                 <button  onclick="fromsubmit()">Sign In</button>
@@ -93,21 +115,42 @@
 
 
 
-<form action = "" method = "POST">
-    
-	{% csrf_token %} 
 
-	<label for="your_name">Your name: </label>
-	<input id="your_name" type="text" name="your_name">
-	<input type="submit" value="OK">
+
+<form action = "" method = "POST" id="formselect">
+
+  <div class="mb-3">
+    <label for="Source" class="form-label">Source</label>
+    <input type="text" class="form-control" id="Source" aria-describedby="Source" name="Source">
+  </div>
+  <div class="mb-3">
+    <label for="distination" class="form-label">distination</label>
+    <input type="distination" class="form-control" id="distination" name="distination">
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 
 
 
+<h1 id="main-heading">Airline Routs</h1>
 
+<div id="routecard">
+{% for key, value in json_data.items %}
+<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title">{{ key }}</h5>
+      <ul>
+        {% for code in value %}
+            <li>{{ code }}</li>    
+        {% endfor %}
+    </ul> 
+    </div>
+  </div>
 
+  {% endfor %}
 
+</div>
     <!-- Optional JavaScript; choose one of the two! -->
     <script src="static/index.js"></script>
 

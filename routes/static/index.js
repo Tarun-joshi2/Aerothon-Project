@@ -18,7 +18,7 @@ fetch("https://api.checkwx.com/metar/lat/40.72/lon/-73.99/decoded", requestOptio
 
 }
 
-
+console.log('function call');
 
 const signUpButton = document.getElementById('signUp');
 const signInButton = document.getElementById('signIn');
@@ -35,9 +35,14 @@ signInButton.addEventListener('click', () => {
 
 
 function shownavbar(){
+  console.log('function call');
   setInterval(function() {
     
+
+    document.getElementById('from-div').style.display='block';
     document.getElementById('main-div').style.display='block';
+    document.getElementById('formselect').style.display='block';
+    
     document.getElementsByClassName('loader')[0].style.display='none';
   
   }, 2000);
@@ -45,65 +50,19 @@ function shownavbar(){
   }
 
 function fromsubmit(){
-   
+  console.log('function call');
   var myDiv = document.getElementById('from-div');
   myDiv.classList.add('hidden');
 
   document.getElementsByClassName('loader')[0].style.display='block';
+
+  document.getElementById('formselect').style.display='none';
+ 
+
+
  
   shownavbar();
    
 }
-
-
-const data={"DEL":[
-        {"dest":"JFK","hours":"14.0"},
-        {"dest": "IAD","hours":"15.30"},
-        {"dest": "EWR","hours": "14.30"},
-        {
-          "dest": "ORD",
-          "hours": "15.0"
-        },
-        {
-          "dest": "SFO",
-          "hours": "15:45"
-        },
-        {
-          "dest": "EWR",
-          "hours": "16:30"
-        }
-    ],
-    
-   "BoM":[{
-      "dest": "EWR",
-      "hours": "16.0"
-    },
-    {
-      "dest": "SFO",
-      "hours": "16.0"
-    },
-      {
-        "dest": "SFO",
-        "hours": "16.0"
-      }
-    ],
-    "BLR":[
-      {
-        "dest": "SFO",
-        "hours": "15.0"
-      },
-
-      {
-        "dest": "SEA",
-        "hours": "17.0"
-      }
-    ],
-      "HYD":[
-          {
-            "dest": "ORD",
-            "hours": "15:45"
-          }
-        ]
-    }
 
 

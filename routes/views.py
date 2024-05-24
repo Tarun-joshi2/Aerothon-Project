@@ -185,11 +185,6 @@ def request1(start,end):
     for key, value in vsets.items():
         g.add_vertex(key, value)
     
-   # start = str(request.args.get('start')).upper()
-  #  end = str(request.args.get('destination')).upper()
-    # start = 'SFO'
-    # end = 'JFK'
-
 
 
     k = 3
@@ -215,29 +210,29 @@ def request1(start,end):
             arr.append(temp)
         data.append(arr)
     response['data'] = data
-    print(response)
+   # print(response)
    # response = jsonify(response)
 
-    print('--------------------------after json');
-
-   # response.headers.add('Access-Control-Allow-Origin', '*')
-   # Iterate through each list of airports
-# Initialize empty lists to store codesfrom django.shortcuts import render
-
-
-
-
+    return response 
 
 
 @csrf_exempt
 def home(request):
-      
-      print(request.POST)
-      request1( 'OGG' ,'DEN')
+    cotext={}  
+    if request.method == 'POST':
+        Source = request.POST.get('Source')
+        distination = request.POST.get('distination')
+        data=request1( Source ,distination)
+        airport_codes_list = [[entry['code'] for entry in sublist] for sublist in data['data']]
+     
+        for i, codes in enumerate(airport_codes_list):
+          print(f"List {i + 1}: {codes}")
+          cotext[f"ROUTE {i + 1}"]=codes
+    print(cotext)
 
 
-      template = loader.get_template('index.html')
-      return HttpResponse(template.render())
+   # template = loader.get_template('index.html')
+    return render(request, 'index.html', {'json_data': cotext})
 
 
 
