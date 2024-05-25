@@ -8,7 +8,6 @@ import json
 from collections import defaultdict
 import heapq
 import sys,jsonify
-
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import HttpResponse
@@ -210,18 +209,29 @@ def request1(start,end):
             arr.append(temp)
         data.append(arr)
     response['data'] = data
-   # print(response)
-   # response = jsonify(response)
+
 
     return response 
 
 
 @csrf_exempt
 def home(request):
+    
+
+
+   # template = loader.get_template('index.html')
+    return render(request, 'index.html')
+
+
+@csrf_exempt
+def rout(request):
     cotext={}  
     if request.method == 'POST':
         Source = request.POST.get('Source')
         distination = request.POST.get('distination')
+        if Source =='' or distination=='':
+            return render(request, 'error.html')
+
         data=request1( Source ,distination)
         airport_codes_list = [[entry['code'] for entry in sublist] for sublist in data['data']]
      
@@ -231,10 +241,5 @@ def home(request):
     print(cotext)
 
 
-   # template = loader.get_template('index.html')
-    return render(request, 'index.html', {'json_data': cotext})
-
-
-
-
+    return render(request, 'index.html',{'json_data': cotext})
 

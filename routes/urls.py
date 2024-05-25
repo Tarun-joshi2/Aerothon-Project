@@ -21,6 +21,7 @@ from . import views
 urlpatterns = [
 
  path('', views.home, name='home'),
+ path('rout/', views.rout, name='rout'),
 
    
 ]
